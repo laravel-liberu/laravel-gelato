@@ -1,0 +1,24 @@
+{
+    "name": "iwebtouch/laravel-gelato",
+    "description": "Laravel Gelato API",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "iWebTouch\\Gelato\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "IWT",
+            "email": "admin2@iwebtouch.com"
+        }
+    ],
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "iWebTouch\\Gelato\\GelatoServiceProvider"
+            ]
+        }
+    }
+}
