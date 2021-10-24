@@ -8,5 +8,4 @@ interface HttpClient
     public function get(string $url, $query = null);
     public function post(string $url, array $data);
     public function getResponse();
-    public function getResponseData();
 }

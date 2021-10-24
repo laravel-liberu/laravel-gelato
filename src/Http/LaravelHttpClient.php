@@ -17,7 +17,7 @@ class LaravelHttpClient implements HttpClient
 
     public function request(string $method = 'GET', string $url, array $options = [], ?array $headers = null) : Response
     {
-        if (!is_null($headers)) {
+        if (! is_null($headers)) {
             $this->setHeaders($headers);
         }
 
@@ -29,36 +29,34 @@ class LaravelHttpClient implements HttpClient
 
     public function get(string $url, $query = null) : Response
     {
-        $this->response = $this->request('GET', $url, [
-                                'query' => $query,
-                            ]);
+        $this->response = Http::withHeaders($this->headers)
+                            ->get($url, $query);
         
         return $this->response;
     }
 
     public function post(string $url, array $data) : Response
     {
-        $this->response = $this->request('POST', $url, [
-                                    'body' => $data,
-                                ]);
+        $this->response = Http::withHeaders($this->headers)
+                            ->post($url, $data);
 
         return $this->response;
     }
 
     public function patch(string $url, array $data) : Response
     {
-        $this->response = $this->request('PATCH', $url, [
-                                'body' => $data,
-                            ]);
+        $this->response = Http::withHeaders($this->headers)
+                            ->patch($url, $data);
 
         return $this->response;
     }
 
     public function put(string $url, array $data) : Response
-    {
-        return $this->request('PUT', $url, [
-                            'body' => $data,
-                        ]);
+    {        
+        $this->response = Http::withHeaders($this->headers)
+                            ->put($url, $data);
+
+        return $this->response;
     }
 
     public function delete(string $url) : Response
@@ -71,10 +69,5 @@ class LaravelHttpClient implements HttpClient
     public function getResponse() : Response
     {
         return $this->response;
-    }
-
-    public function getResponseData() : array
-    {
-        return $this->response->json();
     }
 }

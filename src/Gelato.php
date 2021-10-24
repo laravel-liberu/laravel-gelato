@@ -149,10 +149,10 @@ class Gelato
             "items" => $this->items
         ];
 
-        $this->httpClient
-            ->post('https://order.gelatoapis.com/v3/orders', $data);
+        $response = $this->httpClient
+                        ->post('https://order.gelatoapis.com/v3/orders', $data);
 
-        return $this->httpClient->getResponseData();
+        return $this->httpClient->getResponse();
     }
 
     public function getOrder(string $orderId)
@@ -160,7 +160,7 @@ class Gelato
         $this->httpClient
             ->get('https://order.gelatoapis.com/v3/orders/' . $orderId);
 
-        return $this->httpClient->getResponseData();
+        return $this->httpClient->getResponse();
     }
 
     public function getShippingAddress(string $orderId)
@@ -168,7 +168,7 @@ class Gelato
         $this->httpClient
             ->get('https://order.gelatoapis.com/v3/orders/' . $orderId . '/shipping-address');
 
-        return $this->httpClient->getResponseData();
+        return $this->httpClient->getResponse();
     }
 
     public function getResponse()
