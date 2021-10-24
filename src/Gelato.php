@@ -158,7 +158,7 @@ class Gelato
     public function getOrder(string $orderId)
     {
         $this->httpClient
-            ->post('https://order.gelatoapis.com/v3/orders/' . $orderId);
+            ->get('https://order.gelatoapis.com/v3/orders/' . $orderId);
 
         return $this->httpClient->getResponseData();
     }
