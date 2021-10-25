@@ -2,8 +2,8 @@
 .DS_STORE
 .DS_Store
 ._*
-./node_modules
-./vendor
+/node_modules
+/vendor
 .vagrant
 
 # env
