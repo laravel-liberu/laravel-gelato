@@ -6,7 +6,7 @@ use iWebTouch\Gelato\Http\{ HttpClient, LaravelHttpClient };
 
 class GelatoServiceProvider extends ServiceProvider
 {
-    public $bindings = [
+    public $singletons = [
         HttpClient::class => LaravelHttpClient::class,
     ];
 }
