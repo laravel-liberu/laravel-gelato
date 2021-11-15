@@ -15,7 +15,7 @@ class LaravelHttpClient implements HttpClient
         return $this;
     }
 
-    public function request(string $method = 'GET', string $url, array $options = [], ?array $headers = null) : Response
+    public function request(string $url, string $method = 'GET', array $options = [], ?array $headers = null) : Response
     {
         if (! is_null($headers)) {
             $this->setHeaders($headers);
