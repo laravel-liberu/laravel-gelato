@@ -1,7 +1,8 @@
 <?php
 namespace iWebTouch\Gelato;
 
-use iWebTouch\Gelato\Http\{ HttpClient, LaravelHttpClient };
+use iWebTouch\Gelato\Http\HttpClient;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class Gelato
 {
@@ -92,14 +93,41 @@ class Gelato
 
     public function setShippingAddress($address)
     {
-        $this->shippingAddress = $address;
+        $resolver = new OptionsResolver();
+
+        $resolver->setDefined([
+            'companyName',
+            'firstName',                  // required
+            'lastName',                   // required
+            'addressLine1',               // required
+            'addressLine2',
+            'state',
+            'city',                       // required
+            'postCode',                   // required
+            'country',                    // required
+            'email',                      // required
+            'phone',
+        ])->setRequired([
+            'firstName',
+            'lastName',
+            'addressLine1',
+            'city',
+            'postCode',
+            'country',
+            'email'
+        ]);
+
+        $this->shippingAddress = $resolver->resolve($address);
 
         return $this;
     }
         
     public function setItems(array $items)
     {
-        $this->items = $items;
+        $this->items = [];
+        foreach($items as $item) {
+            $this->addItem($item);
+        }
 
         return $this;
     }
@@ -111,14 +139,20 @@ class Gelato
 
     public function addItem(array $item)
     {
-        // $item = [
-        //     "itemReferenceId" => '',
-        //     "productUid" => '',
-        //     "fileUrl" => '',
-        //     "quantity" => 1
-        // ]
+        static $resolver = null;
 
-        $this->items[] = $item;
+        if (is_null($resolver)) {
+            $resolver = new OptionsResolver;
+
+            $resolver->setRequired([
+                'itemReferenceId',
+                'productUid',
+                'fileUrl',
+                'quantity',
+            ]);
+        }
+
+        $this->items[] = $resolver->resolve($item);
 
         return $this;
     }
