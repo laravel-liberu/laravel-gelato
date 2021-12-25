@@ -19,22 +19,32 @@ class Gelato
 
     public function __construct(private HttpClient $httpClient)
     {
+        $this->setApiKey();
         $this->setRequestHeaders();
     }
 
-    protected function getApiKey()
+    public function setApiKey(string $apiKey = null)
     {
-        $this->apiKey = env('GELATO_API_KEY');
+        $this->apiKey = $apiKey?? env('GELATO_API_KEY');
 
         if (is_null($this->apiKey)) {
             throw new \Exception('Gelato API Key is not set!');
         }
 
+        return $this;
+    }
+
+    public function getApiKey()
+    {
         return $this->apiKey;
     }
 
     protected function setRequestHeaders()
     {
+        if (is_null($this->apiKey)) {
+            throw new \Exception('Gelato API Key has not set!');
+        }
+
         $this->httpClient->setHeaders([
             'Content-Type' => 'application/json',
             'X-API-KEY' => $this->getApiKey()
