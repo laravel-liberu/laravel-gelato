@@ -2,7 +2,7 @@
 namespace iWebTouch\Gelato\Http;
 
 use Illuminate\Support\Facades\Http;
-use Illuminate\Http\Response;
+use Illuminate\Http\Client\Response;
 
 class LaravelHttpClient implements HttpClient
 {
