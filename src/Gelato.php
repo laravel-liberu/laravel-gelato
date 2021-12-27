@@ -25,11 +25,11 @@ class Gelato
 
     public function setApiKey(string $apiKey = null)
     {
-        $this->apiKey = $apiKey?? env('GELATO_API_KEY');
-
-        if (is_null($this->apiKey)) {
+        if (is_null($apiKey) && is_null(env('GELATO_API_KEY'))) {
             throw new \Exception('Gelato API Key is not set!');
         }
+
+        $this->apiKey = $apiKey?? env('GELATO_API_KEY');
 
         return $this;
     }
