@@ -1,5 +1,5 @@
 {
-    "name": "familytree365/laravel-gelato",
+    "name": "cgdprojects/laravel-gelato",
     "description": "Laravel Gelato API",
     "license": "MIT",
     "autoload": {
