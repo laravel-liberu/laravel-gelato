@@ -17,7 +17,7 @@ class Gelato
 
     private array $items = [];
 
-    public function __construct(private HttpClient $httpClient)
+    public function __construct(private readonly HttpClient $httpClient)
     {
         $this->setApiKey();
         $this->setRequestHeaders();
